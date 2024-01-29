@@ -44,6 +44,7 @@ except Exception as e:
     print(f"Error listing objects: {e}")
 
 try:
+    #Delete all objects in the bucket
     objects = s3.list_objects(Bucket='my-bucket')
     if 'Contents' in objects:
         for obj in objects['Contents']:
@@ -51,7 +52,7 @@ try:
         print("All objects in 'my-bucket' deleted.")
     else:
         print("Bucket is already empty.")
-    # Delete the bucket
+    # Delete the bucket (only empty buckets can be deleted)
     s3.delete_bucket(Bucket='my-bucket')
     print("Bucket 'my-bucket' deleted successfully.")
 except Exception as e:
